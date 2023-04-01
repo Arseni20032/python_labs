@@ -50,8 +50,8 @@ def main():
         avg_length_of_word1 = avg_length_of_word(sentences)
         print(f"List of sentences: \n {sentences}")
         print(f"list of non declarative sentences: \n {non_declarative_sentences}")
-        print(f"average number of characters in sentence: {avg_length_of_sentence}")
-        print(f"average number of characters in word: \n {avg_length_of_word} \n")
+        print(f"average number of characters in sentence: {avg_length_of_sentence1}")
+        print(f"average number of characters in word: \n {avg_length_of_word1} \n")
         print("Do you want to continue? Print YES or NO")
         decision = input()
         if decision == "YES" or "yes" or "Yes":
