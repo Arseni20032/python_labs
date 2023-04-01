@@ -14,7 +14,7 @@ def change_users(self, name: str):
     print(f"Switched to {self._current_user}")
 
     text1 = input("Load the container? Enter YES or NO")
-    if text == "YES" or "Yes" or "yes":
+    if text1 == "YES" or "Yes" or "yes":
         self.load()
     else:
         self._cont[name] = set()
