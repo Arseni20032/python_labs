@@ -1,3 +1,4 @@
+# add objects in container
 def add(self, *objs):
     if self._curr_user is not None:
         for counter in objs:

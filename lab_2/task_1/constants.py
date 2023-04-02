@@ -1,3 +1,5 @@
+# regular expression
+
 mister_or_mrs_reg = r"([mM]r\.|[mM]rs\.)"
 jr_reg = r"[Jj]r\."
 etc_reg = r"(\setc\.\s[a-z])"

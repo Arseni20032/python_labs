@@ -5,6 +5,7 @@ def grep(self, filter:str):
     try:
         got_item = False
         for element in self._cont[self._curr_user]:
+            # if you find filter in element
             if re.match(filter, element):
                 print(f"founded: {element}")
                 got_item = True
