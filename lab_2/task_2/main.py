@@ -1,16 +1,4 @@
-
-class Container:
-    from remove import remove
-    from add_users import add_users
-    from load import load
-    from add import add
-    from find import find
-    from print_fun import print_fun
-    from grep import grep
-    from save import save
-    from change_users import change_users
-    _cont = dict()
-    _curr_user = None
+from Container import *
 
 
 def main():
