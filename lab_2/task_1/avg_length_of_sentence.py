@@ -8,4 +8,5 @@ def avg_length_of_sentence(sentences: list):
         chars = re.findall(r"[A-Za-z]", sentence)
         # amount of symbols in the sentence
         sum_of_characters += len(chars)
+        # sum of symbols / amount of sentence in list
     return int(sum_of_characters / len(sentences))
