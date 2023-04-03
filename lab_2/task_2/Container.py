@@ -1,8 +1,9 @@
-import os.path
+import os
 import re
 
 
 class Container:
+
     _cont = dict()
     _curr_user = None
 
@@ -11,10 +12,10 @@ class Container:
         for i in self._cont:
             if i == _name:
                 return
-            self._cont[_name] = set()
-            self.change_users(_name)
+        self._cont[_name] = set()
+        self.change_users(_name)
 
-    def grep(self, filter: str):
+    def grep(self, filter:str):
         try:
             got_item = False
             for element in self._cont[self._curr_user]:
@@ -30,22 +31,24 @@ class Container:
 
     def change_users(self, name: str):
         # if also have user
-        if self._curr_user is not None:
+        if self._curr_user != None:
             text = input("Save current container? Enter YES or NO: \n")
-            if text == "YES" or "Yes" or "yes":
+            if text == "YES":
                 self.save()
             else:
                 # create new container
                 self._cont[name] = set()
+
         # new user
         self._curr_user = name
+
         # if we don't find name user in dictionary
         if not self._curr_user in self._cont.keys():
             # create new set
             self._cont[self._curr_user] = set()
 
         text1 = input("Load the container? Enter YES or NO:\n")
-        if text1 == "YES" or "Yes" or "yes":
+        if text1 == "YES":
             self.load()
         else:
             self._cont[name] = set()
@@ -89,7 +92,7 @@ class Container:
         if self._curr_user is not None:
             # dict current user
             for counter in self._cont[self._curr_user]:
-                if obj == 1:
+                if obj == counter:
                     self._cont[self._curr_user].remove(obj)
                     return
             print("No such element!")
@@ -98,4 +101,4 @@ class Container:
     def print_fun(self):
         if self._curr_user is not None:
             print(self._cont[self._curr_user])
-
+            

@@ -1,7 +1,7 @@
-from main import *
-import pytest
+from parser import *
 
 # testing functions with pytest
+
 
 class Testing:
 
@@ -21,4 +21,3 @@ class Testing:
 
     def test_length_of_sentence_2(self):
         assert avg_length_of_sentence(["ait", "Albania", "aback"]) == 5
-
