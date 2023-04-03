@@ -54,7 +54,7 @@ def main():
         print(f"average number of characters in word: \n {avg_length_of_word1} \n")
         print("Do you want to continue? Print YES or NO")
         decision = input()
-        if decision == "YES" or "yes" or "Yes":
+        if decision == "YES" or decision == "yes" or decision == "Yes":
             continue
         else:
             break

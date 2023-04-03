@@ -1,6 +1,8 @@
 FROM python:3
 
-COPY . .
+WORKDIR /usr/src/app
+
+COPY . /usr/src/app
 
 RUN pip3 install pytest
 
