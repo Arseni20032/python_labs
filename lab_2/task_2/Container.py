@@ -3,7 +3,6 @@ import re
 
 
 class Container:
-
     _cont = dict()
     _curr_user = None
 
@@ -15,7 +14,7 @@ class Container:
         self._cont[_name] = set()
         self.change_users(_name)
 
-    def grep(self, filter:str):
+    def grep(self, filter: str):
         try:
             got_item = False
             for element in self._cont[self._curr_user]:
@@ -101,4 +100,3 @@ class Container:
     def print_fun(self):
         if self._curr_user is not None:
             print(self._cont[self._curr_user])
-            
