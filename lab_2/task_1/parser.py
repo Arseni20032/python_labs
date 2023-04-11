@@ -1,66 +1,60 @@
-import find_non_declarative_sentences
-from avg_length_of_sentence import avg_length_of_sentence
-from avg_length_of_word import avg_length_of_word
-from find_sentences import *
-from top_k_n_grams import *
+import re
+from constants import latin_symbol, reg_expr_declarative, reg_expr_non_declarative, \
+    reg_expr_to_word, reg_expr_to_num
 
 
-def main():
-    while True:
-        print("Write the text: ")
-        text = str(input())
-        print("Write n and k ( > 0 ): ")
-        while True:
-            try:
-                n = int(input())
-                k = int(input())
-            except ValueError:
-                print("Error. Please, try again")
-                continue
-            if n <= 0 or k <= 0:
-                print("Error. Please, try again (n or k <= 0) ")
-                continue
-            break
-        sentences = find_sentences(text)
-        if len(sentences) == 0:
-            print("Error. Please, try again (len of sentences = 0)")
-            continue
+def find_sentences(text: str):
+    sentences_with_captured_groups = re.findall(reg_expr_declarative, text)
+    sentences = []
+    for sentence in sentences_with_captured_groups:
+        sentences.append(sentence[0])
+    return sentences
 
-        ngrams = top_k_n_grams(sentences, n)
-        sorted_values = sorted(ngrams.values(), reverse=True)
-        sorted_dict = {}
 
-        for counter in sorted_values:
-            for counter_2 in ngrams.keys():
-                if ngrams[counter_2] == counter:
-                    sorted_dict[counter_2] = ngrams[counter_2]
+def find_non_declarative_sentences(text: str):
+    sentences_with_captured_groups = re.findall(reg_expr_non_declarative, text)
+    sentences = []
+    for sentence in sentences_with_captured_groups:
+        sentences.append(sentence[0])
+    return sentences
 
-        if k > len(sorted_dict):
-            print("k more than a length of n-grams!")
-            k = len(sorted_dict)
 
-        var = 1
-        for key in sorted_dict:
-            if var <= k:
-                print(f"{key}: {sorted_dict[key]}")
-                var += 1
+def average_length_of_sentence(sentences: list):
+    sum_of_characters = 0
+    for sentence in sentences:
+        # all symbols with regular expression
+        chars = re.findall(latin_symbol, sentence)
+        # amount of symbols in the sentence
+        sum_of_characters += len(chars)
+    # sum of symbols / amount of sentence in list
+    return int(sum_of_characters / len(sentences))
 
-        non_declarative_sentences = find_non_declarative_sentences.find_non_declarative_sentences(text)
-        avg_length_of_sentence1 = avg_length_of_sentence(sentences)
-        avg_length_of_word1 = avg_length_of_word(sentences)
-        print(f"List of sentences: \n {sentences}")
-        print(f"list of non declarative sentences: \n {non_declarative_sentences}")
-        print(f"average number of characters in sentence: {avg_length_of_sentence1}")
-        print(f"average number of characters in word: \n {avg_length_of_word1} \n")
-        print("Do you want to continue? Print YES or NO")
-        decision = input()
-        if decision == "YES" or decision == "yes" or decision == "Yes":
-            continue
+
+def average_length_of_word(sentences: list):
+    number_of_words = 0
+    sum_of_characters = 0
+    for sentence in sentences:
+        number_of_words += len(sentence.split(' '))
+        chars = re.findall(latin_symbol, sentence)
+        sum_of_characters += len(chars)
+    return int(sum_of_characters / number_of_words)
+
+
+def top_k_repeated_n_grams(text: str, k: int, n: int):
+    sentences_with_captured_groups = [word for word in re.findall(reg_expr_to_word, text) if word not in
+                                      re.findall(reg_expr_to_num, text)]
+
+    if len(sentences_with_captured_groups) < n:
+        return f'Error! N ({n}) is bigger that number of words({len(sentences_with_captured_groups)})'
+
+    dictionary = {}
+
+    for i in range(len(sentences_with_captured_groups) - n + 1):
+        n_gram = " ".join(sentences_with_captured_groups[i:i + n])
+        if n_gram not in dictionary.keys():
+            dictionary[n_gram] = 1
         else:
-            break
-
-
-if __name__ == "__main__":
-    main()
-
-# Hello. It's a testing text! What the weather like today?
+            dictionary[n_gram] += 1
+    if len(dictionary) <= k:
+        return sorted(dictionary.items(), key=lambda x: x[1], reverse=True)
+    return sorted(dictionary.items(), key=lambda x: x[1], reverse=True)[0:k]

@@ -1,4 +1,4 @@
-from parser import *
+from parser import find_sentences, average_length_of_sentence, average_length_of_word
 
 # testing functions with pytest
 
@@ -11,13 +11,13 @@ class Testing:
                                                                                             " Or are you a teacher?"]
 
     def test_length_of_word_1(self):
-        assert avg_length_of_word(["computer"]) == 8
+        assert average_length_of_word(["computer"]) == 8
 
     def test_length_of_word_2(self):
-        assert avg_length_of_word(["hello!!."]) == 5
+        assert average_length_of_word(["hello!!."]) == 5
 
     def test_length_of_sentence_1(self):
-        assert avg_length_of_sentence(["adapt", "hello", "actor"]) == 5
+        assert average_length_of_sentence(["adapt", "hello", "actor"]) == 5
 
     def test_length_of_sentence_2(self):
-        assert avg_length_of_sentence(["ait", "Albania", "aback"]) == 5
+        assert average_length_of_sentence(["ait", "Albania", "aback"]) == 5
