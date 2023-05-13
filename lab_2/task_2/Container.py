@@ -73,9 +73,9 @@ class Container:
         print(f"Container for user {self._curr_user} loaded")
 
     # add objects in container
-    def add(self, *objs):
+    def add(self, keys):
         if self._curr_user is not None:
-            for counter in objs:
+            for counter in keys:
                 self._cont[self._curr_user].add(counter)
 
     # find elements in container
